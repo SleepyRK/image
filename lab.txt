@@ -1,0 +1,105 @@
+Pre=imread('peppers.png');
+
+Contrast=imadjust(Pre,[],[],1.5);
+subplot(4,4,1),imshow(Contrast),title('Contrast');
+
+Red=Pre;
+Red(:,:,2)=0;
+Red(:,:,3)=0;
+subplot(4,4,2),imshow(Red),title('Red Color');
+
+Green=Pre;
+Green(:,:,1)=0;
+Green(:,:,3)=0;
+subplot(4,4,3),imshow(Green),title('Green Color');
+
+Blue=Pre;
+Blue(:,:,1)=0;
+Blue(:,:,2)=0;
+subplot(4,4,4),imshow(Blue),title('Blue Color');
+
+HSV=rgb2hsv(Pre);
+
+subplot(4,4,5),imshow(HSV(:,:,1)),title('Hue');
+subplot(4,4,6),imshow(HSV(:,:,2)),title('Saturation');
+subplot(4,4,7),imshow(HSV(:,:,3)),title('Value');
+
+
+I=imread('peppers.png');
+subplot(4,4,1),imshow(I);
+title('Original Image');
+
+% Gaussian Noise
+noi=imnoise(I,'gaussian',0,0.5);
+subplot(4,4,2),imshow(noi);
+title('Gaussian Noise');
+
+% Poisson Noise
+noi1=imnoise(I,'poisson');
+subplot(4,4,3),imshow(noi1);
+title('Poisson Noise');
+
+% Salt & Pepper Noise
+noi2=imnoise(I,'salt & pepper',0.5);
+subplot(4,4,4),imshow(noi2);
+title('Salt & Pepper Noise');
+
+% Speckle Noise
+noi3=imnoise(I,'speckle',0.5);
+subplot(4,4,5),imshow(noi3);
+title('Speckle Noise');
+
+% Gamma Noise
+gammaNoise=gamrnd(2,0.1,size(I));
+noi4=im2double(I)+gammaNoise;
+noi4=mat2gray(noi4);
+subplot(4,4,6),imshow(noi4);
+title('Gamma Noise');
+
+% Uniform Noise
+uniformNoise=-0.1+(0.2)*rand(size(I));
+noi5=im2double(I)+uniformNoise;
+noi5=mat2gray(noi5);
+subplot(4,4,7),imshow(noi5);
+title('Uniform Noise');
+
+GAMMA NOISE
+
+Code:
+gammaNoise=gamrnd(2,0.1,size(I));
+noi4=im2double(I)+gammaNoise;
+noi4=mat2gray(noi4);
+subplot(4,4,6),imshow(noi4);
+title('Gamma Noise');
+
+Explanation:
+1. gamrnd(2,0.1,size(I)) generates random Gamma noise.
+2. 2 is the shape parameter and 0.1 is the scale parameter.
+3. size(I) makes the noise the same size as the image.
+4. im2double(I) converts the image into double format.
+5. The Gamma noise is added to the original image.
+6. mat2gray() adjusts the pixel values between 0 and 1.
+7. subplot(4,4,6) displays the image at position 6.
+8. imshow() shows the noisy image.
+9. title() gives the image the name "Gamma Noise".
+
+
+UNIFORM NOISE
+
+Code:
+uniformNoise=-0.1+(0.2)*rand(size(I));
+noi5=im2double(I)+uniformNoise;
+noi5=mat2gray(noi5);
+subplot(4,4,7),imshow(noi5);
+title('Uniform Noise');
+
+Explanation:
+1. rand(size(I)) generates random values between 0 and 1.
+2. -0.1+(0.2)*rand(size(I)) changes the noise range to -0.1 to +0.1.
+3. size(I) makes the noise the same size as the image.
+4. im2double(I) converts the image into double format.
+5. The Uniform noise is added to the original image.
+6. mat2gray() adjusts the pixel values between 0 and 1.
+7. subplot(4,4,7) displays the image at position 7.
+8. imshow() shows the noisy image.
+9. title() gives the image the name "Uniform Noise".
